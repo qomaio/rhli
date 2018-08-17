@@ -1,0 +1,63 @@
+---
+title: "Hello R-HLI!"
+author: "Qoma LLC"
+date: '`r Sys.Date()`'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment='')
+```
+
+The *rhli* variant of the traditional first program, *Hello, World!* appears below.  To the extent possible, the *rhli* package exactly replicates the _FAME C-HLI_ interface.  For information on parameters and  functions, refer to the _C-HLI_ [documentation](https://fame.sungard.com/support_secure/fame/online_help_116/index.html).  The _C-HLI_ provides very low level, very complete access to _FAME_.  
+
+_C-HLI_ functions return a `status` code to indicate success (zero) or failure. Refer to *C HLI Status Codes* in the [documentation](https://fame.sungard.com/support_secure/fame/online_help_116/index.html) to interpret non-zero `status` codes. 
+
+| Code   | Value | What to do?                                                                           |
+|--------|-------|---------------------------------------------------------------------------------------|
+| HSUCC  | 0     | You are good! "Success"                                                               |
+| HNINIT | 2     | The HLI has not been initialized.                                                     |
+| HBPROD | 55    | Contact Qoma, get authorized for Qoma products.                                        |
+| HLICFL | 98    | Contact FIS, get authorized for FAME products.                                        |
+
+The below program:
+
+1. Initializes the _C-HLI_. No other _C-HLI_ calls work until the _C-HLI_ is initialized.
+1. Gets the _C-HLI_ version number. The _C-HLI_ version number is helpful for debugging.
+1. Finishes the _C-HLI_. This final _C-HLI_ call will prevent loss of data.
+
+These three calls should appear in all _C-HLI_ programs.  
+
+```{r comment=''}
+# Load the rhli package
+library("rhli")
+
+# Initialize the C-HLI
+status <- Integer(-1)
+cfmini(status)
+cat(sprintf("cfmini(status) status=%d",status$value))
+
+# Get the C-HLI version number
+ver <- Numeric(-1)
+cfmver(status,ver)
+cat(sprintf("cfmver(status,ver) status=%d ver=%.5f",status$value,ver$value))
+
+# Finish the C-HLI
+cfmfin(status)
+cat(sprintf("cfmfin(status) status=%d",status$value))
+
+```
+
+```{r, echo=FALSE}
+# Say hello!
+cat(sprintf("\nHello FAME!\n\n  %s \"%s\" %s\n  rhli version %s\n  C-HLI version %.5f\n\n",
+  R.Version()$version.string,R.Version()$nickname,R.Version()$platform,            
+  packageVersion("rhli"),
+  ver$value))
+
+# Unload C-HLI shared library 
+#   (required for cfmini() to work when building next vignette)
+unloadNamespace("rhli")
+```

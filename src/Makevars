@@ -1,0 +1,10 @@
+PLATFORM=$(shell "$(R_HOME)/bin/Rscript" -e 'cat(R.version$$platform)')
+.PHONY: all
+
+# separate chli from rhli on RedHat
+ifeq   "$(PLATFORM)" "x86_64-redhat-linux-gnu"
+all:;	$(CC) -shared -o libchli.so chli.o -L$(R_HOME)/lib -lR;$(CC) -shared -o rhli.so rhli.o qoma-hli.o -L$(PWD) -lchli -L$(R_HOME)/lib -lR
+else
+all:;@echo PLATFORM [$(PLATFORM)]
+endif
+

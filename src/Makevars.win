@@ -1,0 +1,8 @@
+.PHONY: all
+
+all:
+	$(CC) -shared -o chli.dll chli.o -L$(R_HOME)/bin$(R_ARCH_BIN) -lR
+	$(CC) -shared -o rhli.dll rhli.o qoma-hli.o -L. -lchli -L$(R_HOME)/bin$(R_ARCH_BIN) -lR
+
+clean:
+	rm -f chli.dll
