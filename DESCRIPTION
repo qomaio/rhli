@@ -1,6 +1,6 @@
 Package: rhli
 Title: An R Implementation of the FIS MarketMap C-Toolkit
-Version: 0.0.2
+Version: 0.0.2.9000
 Authors@R: c(
     person("Kevin", "Keane", email = "krkeane@qoma.io", role = c("aut", "cre")),
     person("Qoma", "LLC", email = "info@qoma.io", role = "cph"))
