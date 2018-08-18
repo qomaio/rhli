@@ -1,6 +1,6 @@
 # R Host Language Interface
 The rhli package offers complete access from R to the [FIS MarketMap](https://fame.sungard.com/support.html) 
-C-Toolkit ("FAME C-HLI"). 
+C-Toolkit ("FAME C-HLI"). The [qoma.smuggler](https://github.com/qomaio/r-smuggler) package offers higher level functionality when working with both R and FAME.
 
 FAME is a fully integrated software and database 
 management system from FIS that provides the following capabilities: 
