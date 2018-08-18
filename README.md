@@ -23,12 +23,12 @@ management system from FIS that provides the following capabilities:
 
 From an R console, 
 
-* install.packages("rhli")
-* source(paste(find.package("rhli"),"examples/HelloWorld.R",sep="/"))
+* `install.packages("rhli")`
+* `source(paste(find.package("rhli"),"examples/HelloWorld.R",sep="/"))`
 
 From an R console inside R Studio,     
 
-* file.edit(paste(find.package("rhli"),"examples/0-hello-rhli.Rmd",sep="/"))
+* `file.edit(paste(find.package("rhli"),"examples/0-hello-rhli.Rmd",sep="/"))`
     * from the editor, hit the `Knitr` button to render the R Markdown example
 
 On first use, you will be directed to a website to obtain a `QOMA_PIN` which will entitle you to use the RHLI for the duration of your FAME license.
